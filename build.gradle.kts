@@ -41,27 +41,22 @@ tasks.register<Exec>("reactRun") {
 	commandLine("npm", "run", "dev")
 }
 
+val cleanStatic by tasks.register<Delete>("cleanStatic") {
+	delete("src/main/resources/static")
+}
 
 val npmBuild by tasks.register<Exec>("npmBuild") {
-    workingDir = file("src/main/react")
-    commandLine("npm", "run", "build")
+	dependsOn(cleanStatic)
+	workingDir = file("src/main/react")
+	commandLine("npm", "run", "build")
 }
 
-val cleanStatic by tasks.register<Delete>("cleanStatic") {
-    delete("src/main/resources/static")
-}
+val copyFrontend by tasks.register<Copy>("buildFrontend") {
+	group = "build"
+	description = "Build frontend"
+	
+	dependsOn(npmBuild)
 
-val copyFrontend by tasks.register<Copy>("copyFrontend") {
-    dependsOn(npmBuild, cleanStatic)
-
-    from("src/main/react/dist")
-    into("src/main/resources/static")
-}
-
-tasks.register("buildFrontend") {
-    dependsOn(copyFrontend)
-}
-
-tasks.named("processResources") {
-    dependsOn("buildFrontend")
+	from("src/main/react/dist")
+	into("src/main/resources/static")
 }
