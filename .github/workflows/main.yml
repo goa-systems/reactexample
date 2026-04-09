@@ -13,6 +13,7 @@ env:
   ZULUVERSION: 25.32.21
   SONARVERSION: 8.0.1.6346
   GRADLEVERSION: 9.4.1
+  NODEVERSION: 25.9.0
 
 jobs:
   build:
@@ -24,6 +25,7 @@ jobs:
           bash ./gsdo/prepare/java.sh
           bash ./gsdo/prepare/gradle.sh
           bash ./gsdo/prepare/sonarscanner.sh
+          bash ./gsdo/prepare/node.sh
       - name: Run a multi-line script
         run: |
           bash ./gsdo/build/build.sh
