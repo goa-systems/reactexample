@@ -35,4 +35,7 @@ jobs:
           sparse-checkout-cone-mode: false
       - name: Deploy
         run: |
+          ls -alh .
+          ls -alh ./gsdo
+          ls -alh ./gsdo/deploy
           bash ./gsdo/deploy/deploy.sh
