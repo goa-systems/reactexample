@@ -22,9 +22,10 @@ jobs:
       - name: Checkout deployment logic
         uses: actions/checkout@v6
         with:
+          clean: true
           sparse-checkout: |
             gsdt
-          sparse-checkout-cone-mode: false
+          sparse-checkout-cone-mode: true
       - name: Deploy
         run: |
           ls -al
