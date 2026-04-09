@@ -19,6 +19,8 @@ jobs:
     runs-on: deploy
     needs: build
     steps:
+      - name: Force clean workspace
+        run: rm -rf ./* ./.??* || true
       - name: Checkout deployment logic
         uses: actions/checkout@v6
         with:
