@@ -1,0 +1,32 @@
+name: main
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: build
+    steps:
+      - uses: actions/checkout@v6
+      - name: Run a multi-line script
+        run: |
+          echo "Building project"
+  deploy:
+    runs-on: deploy
+    needs: build
+    steps:
+      - name: Checkout only gsdt folder
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            gsdt
+          sparse-checkout-cone-mode: true
+      - name: Run a multi-line script
+        run: |
+          chmod u+x gsdt/deploy.sh
+          ./gsdt/deploy.sh
+          chmod u-x gsdt/deploy.sh
