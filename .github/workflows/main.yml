@@ -1,0 +1,38 @@
+name: main
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: build
+    steps:
+      - uses: actions/checkout@v6
+      - name: Run a multi-line script
+        run: |
+          echo "Building project"
+  deploy:
+    runs-on: deploy
+    needs: build
+    steps:
+      - name: Force clean workspace
+        run: rm -rf ./* ./.??* || true
+      - name: Checkout deployment logic
+        uses: actions/checkout@v6
+        with:
+          clean: true
+          sparse-checkout: |
+            gsdt
+            !grad*
+            !*.kts
+          sparse-checkout-cone-mode: false
+      - name: Deploy
+        run: |
+          ls -al
+          chmod u+x gsdt/deploy.sh
+          ./gsdt/deploy.sh
+          chmod u-x gsdt/deploy.sh
