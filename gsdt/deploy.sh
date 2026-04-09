@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-echo "Deploying application"
+echo "[$(date +"%Y-%m-%d %H:%M:%S")] - Deploying application."
