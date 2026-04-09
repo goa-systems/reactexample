@@ -45,10 +45,20 @@ val cleanStatic by tasks.register<Delete>("cleanStatic") {
 	delete("src/main/resources/static")
 }
 
+val npmInstall by tasks.register<Exec>("npmInstall") {
+  group = "prepare"
+  description = "Install front end dependencies."
+  dependsOn(cleanStatic)
+  workingDir = file("src/main/react")
+  commandLine("npm", "install")
+}
+
 val npmBuild by tasks.register<Exec>("npmBuild") {
-	dependsOn(cleanStatic)
-	workingDir = file("src/main/react")
-	commandLine("npm", "run", "build")
+  group = "build"
+  description = "Build front end."
+  dependsOn(npmInstall)
+  workingDir = file("src/main/react")
+  commandLine("npm", "run", "build")
 }
 
 val copyFrontend by tasks.register<Copy>("buildFrontend") {
