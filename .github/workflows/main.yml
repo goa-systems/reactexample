@@ -32,7 +32,5 @@ jobs:
           sparse-checkout-cone-mode: false
       - name: Deploy
         run: |
-          ls -al
-          chmod u+x gsdt/deploy.sh
-          ./gsdt/deploy.sh
-          chmod u-x gsdt/deploy.sh
+          ls -alh
+          bash ./gsdt/deploy.sh
