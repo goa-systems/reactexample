@@ -27,7 +27,9 @@ jobs:
           clean: true
           sparse-checkout: |
             gsdt
-          sparse-checkout-cone-mode: true
+            !grad*
+            !*.kts
+          sparse-checkout-cone-mode: false
       - name: Deploy
         run: |
           ls -al
