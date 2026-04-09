@@ -9,6 +9,10 @@ on:
 
 env:
   VERSION: 0.0.1
+  JAVAVERSION: 25.0.2
+  ZULUVERSION: 25.32.21
+  SONARVERSION: 8.0.1.6346
+  GRADLEVERSION: 9.4.1
 
 jobs:
   build:
