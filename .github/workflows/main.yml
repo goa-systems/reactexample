@@ -15,6 +15,11 @@ jobs:
     runs-on: build
     steps:
       - uses: actions/checkout@v6
+      - name: Prepare environment
+        run: |
+          bash ./gsdo/prepare/java.sh
+          bash ./gsdo/prepare/gradle.sh
+          bash ./gsdo/prepare/sonarscanner.sh
       - name: Run a multi-line script
         run: |
           bash ./gsdo/build/build.sh
