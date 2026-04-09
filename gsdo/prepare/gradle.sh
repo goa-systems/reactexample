@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+set -euo pipefail
 BASE_DIR="${HOME}/.local/programs/gradle"
 DIRNAME=gradle-${GRADLEVERSION}
 PACKAGE=${DIRNAME}-bin

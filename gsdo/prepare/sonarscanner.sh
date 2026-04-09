@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+set -euo pipefail
 BASE_DIR="${HOME}/.local/programs/sonarqube"
 DIRNAME=sonar-scanner-${SONARVERSION}-linux-x64
 PACKAGE=sonar-scanner-cli-${SONARVERSION}-linux-x64
