@@ -61,7 +61,7 @@ val npmBuild by tasks.register<Exec>("npmBuild") {
   commandLine("npm", "run", "build")
 }
 
-val copyFrontend by tasks.register<Copy>("buildFrontend") {
+val buildFrontend by tasks.register<Copy>("buildFrontend") {
 	group = "build"
 	description = "Build frontend"
 	
@@ -69,4 +69,8 @@ val copyFrontend by tasks.register<Copy>("buildFrontend") {
 
 	from("src/main/react/dist")
 	into("src/main/resources/static")
+}
+
+tasks.processResources {
+  dependsOn(buildFrontend)
 }
