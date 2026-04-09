@@ -3,6 +3,12 @@ set -euo pipefail
 BASE_DIR="${HOME}/.local/programs/node"
 NODE_PACKAGE=node-v${NODEVERSION}-linux-x64
 APP_DIR="${BASE_DIR}/${NODE_PACKAGE}"
+
+if [ ! -d "${APP_DIR}" ]
+then
+    mkdir -p "${BASE_DIR}"
+fi
+
 if [ ! -d "${APP_DIR}" ]
 then
     wget -O "${HOME}/node.tar.gz" -q "https://nodejs.org/dist/v${NODEVERSION}/${NODE_PACKAGE}.tar.gz"
