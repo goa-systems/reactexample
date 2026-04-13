@@ -16,6 +16,7 @@ env:
   NODEVERSION: 25.9.0
   DISTSERVER: "tools.goa.systems"
   DISTUSER: "svcdeploy"
+  DISTNAME: "reactexample"
 
 jobs:
   build:
@@ -56,4 +57,5 @@ jobs:
           ls -alh .
           ls -alh ./gsdo
           ls -alh ./gsdo/deploy
+          bash ./gsdo/deploy/download.sh
           bash ./gsdo/deploy/deploy.sh
