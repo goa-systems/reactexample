@@ -48,7 +48,6 @@ val cleanStatic by tasks.register<Delete>("cleanStatic") {
 val npmInstall by tasks.register<Exec>("npmInstall") {
   group = "prepare"
   description = "Install front end dependencies."
-  dependsOn(cleanStatic)
   workingDir = file("src/main/react")
   commandLine("npm", "install")
 }
