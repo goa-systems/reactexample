@@ -1,4 +1,4 @@
-name: main
+name: main 
 
 on:
   push:
@@ -14,6 +14,8 @@ env:
   SONARVERSION: 8.0.1.6346
   GRADLEVERSION: 9.4.1
   NODEVERSION: 25.9.0
+  DISTSERVER: "tools.goa.systems"
+  DISTUSER: "svcdeploy"
 
 jobs:
   build:
@@ -29,6 +31,11 @@ jobs:
       - name: Run a multi-line script
         run: |
           bash ./gsdo/build/build.sh
+      - name: Publish
+        env: 
+          SSH_SVCDEPLOY_HETZNER: ${{ secrets.SSH_SVCDEPLOY_HETZNER }}
+        run: |
+          bash ./gsdo/publish/publish.sh
   deploy:
     runs-on: deploy
     needs: build
