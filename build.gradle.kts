@@ -42,10 +42,12 @@ tasks.register<Exec>("reactRun") {
   commandLine(npmcmd, "run", "dev")
 }
 
-val cleanStatic by tasks.register<Delete>("cleanStatic") {
+val cleanReact by tasks.register<Delete>("cleanReact") {
   group = "build"
   description = "Cleans the folder 'static'."
   delete("src/main/resources/static")
+  delete("src/main/react/dist")
+  delete("src/main/react/node_modules")
 }
 
 val npmInstall by tasks.register<Exec>("npmInstall") {
@@ -66,6 +68,7 @@ val npmBuild by tasks.register<Exec>("npmBuild") {
 val integrateFrontend by tasks.register<Copy>("integrateFrontend") {
   group = "build"
   description = "Build frontend"
+  dependsOn(npmBuild)
   from("src/main/react/dist")
   into("src/main/resources/static")
 }
