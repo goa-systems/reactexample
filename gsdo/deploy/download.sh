@@ -5,9 +5,8 @@ KEYFILE="${HOME}/.ssh/$(uuidgen)"
 KHFILE="${HOME}/.ssh/$(uuidgen)"
 
 echo "${SSH_SVCDEPLOY_HETZNER}" > "${KEYFILE}"
-ssh-keyscan "${DISTSERVER}" 1> "${KHFILE}" 2> /dev/null
+ssh-keyscan -4 "${DISTSERVER}" 1> "${KHFILE}" 2> /dev/null
 chmod 600 "${KEYFILE}"
-# scp -i "${KEYFILE}" -o UserKnownHostsFile="${KHFILE}" "${DISTUSER}"@"${DISTSERVER}":"${DISTNAME}-${VERSION}.jar" "${HOME}/${DISTNAME}-${VERSION}.jar"
-ssh -i "${KEYFILE}" -o UserKnownHostsFile="${KHFILE}" -l "${DISTUSER}" "${DISTSERVER}" "ls -al"
+scp -4 -i "${KEYFILE}" -o UserKnownHostsFile="${KHFILE}" "${DISTUSER}"@"${DISTSERVER}":"${DISTNAME}-${VERSION}.jar" "${HOME}/${DISTNAME}-${VERSION}.jar"
 rm "${KHFILE}"
 rm "${KEYFILE}"
