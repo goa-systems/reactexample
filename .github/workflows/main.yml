@@ -53,9 +53,8 @@ jobs:
             !*.kts
           sparse-checkout-cone-mode: false
       - name: Deploy
+        env: 
+          SSH_SVCDEPLOY_HETZNER: ${{ secrets.SSH_SVCDEPLOY_HETZNER }}
         run: |
-          ls -alh .
-          ls -alh ./gsdo
-          ls -alh ./gsdo/deploy
           bash ./gsdo/deploy/download.sh
           bash ./gsdo/deploy/deploy.sh
