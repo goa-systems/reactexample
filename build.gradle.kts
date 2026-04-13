@@ -1,7 +1,4 @@
-import org.gradle.api.tasks.Exec
-import org.gradle.kotlin.dsl.register
-import org.gradle.api.tasks.Delete
-import org.gradle.api.tasks.Copy
+import org.apache.tools.ant.taskdefs.condition.Os
 
 plugins {
   java
@@ -11,6 +8,10 @@ plugins {
 
 group = "goa.systems"
 version = "0.0.1"
+
+/* Specify the npm command to be used. */
+var npmcmd: String
+if (Os.isFamily(Os.FAMILY_WINDOWS)) { npmcmd = "npm.cmd" } else { npmcmd = "npm" }
 
 java {
   sourceCompatibility = JavaVersion.VERSION_21
@@ -34,11 +35,35 @@ tasks.withType<Test> {
   useJUnitPlatform()
 }
 
+tasks.register<Exec>("reactRun") {
+  group = "build"
+  description = "Runs the React dev server (npm run dev)"
+  workingDir = file("src/main/react")
+  commandLine(npmcmd, "run", "dev")
+}
+
 val cleanStatic by tasks.register<Delete>("cleanStatic") {
+  group = "build"
+  description = "Cleans the folder 'static'."
   delete("src/main/resources/static")
 }
 
-val buildFrontend by tasks.register<Copy>("integrateFrontend") {
+val npmInstall by tasks.register<Exec>("npmInstall") {
+  group = "prepare"
+  description = "Install front end dependencies."
+  workingDir = file("src/main/react")
+  commandLine(npmcmd, "install")
+}
+
+val npmBuild by tasks.register<Exec>("npmBuild") {
+  group = "build"
+  description = "Build front end."
+  dependsOn(npmInstall)
+  workingDir = file("src/main/react")
+  commandLine(npmcmd, "run", "build")
+}
+
+val integrateFrontend by tasks.register<Copy>("integrateFrontend") {
   group = "build"
   description = "Build frontend"
   from("src/main/react/dist")
@@ -46,5 +71,5 @@ val buildFrontend by tasks.register<Copy>("integrateFrontend") {
 }
 
 tasks.processResources {
-  dependsOn(buildFrontend)
+  dependsOn(integrateFrontend)
 }
