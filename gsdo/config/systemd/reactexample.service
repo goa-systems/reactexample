@@ -1,0 +1,12 @@
+[Unit]
+Description=GOA Systems reactexample
+
+[Service]
+User=user
+Group=user
+SuccessExitStatus=143
+WorkingDirectory=
+ExecStart=/path/to/java -XshowSettings -cp "libs/*" goa.systems.reactexample.ReactexampleApplication --spring.config.location=file:"conf/application.properties"
+
+[Install]
+WantedBy=multi-user.target
