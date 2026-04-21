@@ -3,7 +3,7 @@ set -euo pipefail
 APP_DIR="${HOME}/.local/programs/goasystems/reactexample"
 echo "[$(date +"%Y-%m-%d %H:%M:%S")] - Deploying application in \"${PWD}\". [${GITHUB_SHA}]"
 ls -al "${APP_DIR}/${DISTNAME}-${VERSION}.jar"
-echo "server.port=${SERVER_PORT}" > "${APP_DIR}/application.properties"
+echo "server.port=${SERVERPORT}" > "${APP_DIR}/application.properties"
 PATH="${JAVA_HOME}/bin:${PATH}"
 OWD="${PWD}"
 cd ${APP_DIR}
