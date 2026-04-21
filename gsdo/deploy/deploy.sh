@@ -9,6 +9,8 @@ OWD="${PWD}"
 cd ${APP_DIR}
 java -jar "${APP_DIR}/${DISTNAME}-${VERSION}.jar" &
 PID=$!
+ps aux | grep java | grep react
+echo "Disowning ${PID}"
 disown $PID
 echo $PID > "${APP_DIR}/run.pid"
 cd "${OWD}"
