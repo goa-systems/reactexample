@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v6
       - name: Prepare environment
         run: |
-          bash ./gsdo/prepare/java.sh
+          bash ./gsdo/prepare/jdk.sh
           bash ./gsdo/prepare/gradle.sh
           bash ./gsdo/prepare/sonarscanner.sh
           bash ./gsdo/prepare/node.sh
@@ -49,6 +49,7 @@ jobs:
           clean: true
           sparse-checkout: |
             gsdo/deploy
+            gsdo/prepare/jre.sh
             !grad*
             !*.kts
           sparse-checkout-cone-mode: false
@@ -56,5 +57,6 @@ jobs:
         env: 
           SSH_SVCDEPLOY_HETZNER: ${{ secrets.SSH_SVCDEPLOY_HETZNER }}
         run: |
+          bash ./gsdo/prepare/jre.sh
           bash ./gsdo/deploy/download.sh
           bash ./gsdo/deploy/deploy.sh
