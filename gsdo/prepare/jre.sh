@@ -8,7 +8,7 @@ if [ ! -d "${APP_DIR}" ]
 then
     PKG="/tmp/$(uuidgen).tar.gz"
     wget -4 -O "${PKG}" -q "https://cdn.azul.com/zulu/bin/${JAVA_PACKAGE}.tar.gz"
-    tar -x -f "${PKG}" -C "${APP_DIR}"
+    tar -x -f "${PKG}" -C "${BASE_DIR}"
     rm "${PKG}"
 else
     echo "Java already installed."
