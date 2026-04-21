@@ -7,7 +7,7 @@ echo "server.port=${SERVERPORT}" > "${APP_DIR}/application.properties"
 PATH="${JAVA_HOME}/bin:${PATH}"
 OWD="${PWD}"
 cd ${APP_DIR}
-java -jar "${APP_DIR}/${DISTNAME}-${VERSION}.jar" &
+java -jar "${APP_DIR}/${DISTNAME}-${VERSION}.jar" >/dev/null 2>&1 &
 PID=$!
 ps aux | grep java | grep react
 echo "Disowning ${PID}"
