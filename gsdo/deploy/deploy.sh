@@ -8,5 +8,7 @@ PATH="${JAVA_HOME}/bin:${PATH}"
 OWD="${PWD}"
 cd ${APP_DIR}
 java -jar "${APP_DIR}/${DISTNAME}-${VERSION}.jar" &
-echo $! > "${APP_DIR}/run.pid"
+PID=$!
+disown $PID
+echo $PID > "${APP_DIR}/run.pid"
 cd "${OWD}"
