@@ -40,7 +40,7 @@ jobs:
 #          bash ./gsdo/publish/publish.sh
   deploy:
     runs-on: deploy
-    needs: build
+#    needs: build
     steps:
       - name: Force clean workspace
         run: rm -rf ./* ./.??* || true
