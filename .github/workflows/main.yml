@@ -14,9 +14,9 @@ env:
   SONARVERSION: 8.0.1.6346
   GRADLEVERSION: 9.4.1
   NODEVERSION: 25.9.0
-  DISTSERVER: "162.55.183.29"
-  DISTUSER: "svcdeploy"
-  DISTNAME: "reactexample"
+  DISTSERVER: tools.goa.systems
+  DISTUSER: svcdeploy
+  DISTNAME: reactexample
 
 jobs:
   build:
