@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
-APP_DIR="${HOME}/.local/programs/java"
-if [ ! -d "${APP_DIR}" ]; then mkdir -p "$APP_DIR"; fi
+BASE_DIR="${HOME}/.local/programs/java"
+if [ ! -d "${BASE_DIR}" ]; then mkdir -p "$BASE_DIR"; fi
 JAVA_PACKAGE=zulu${ZULUVERSION}-ca-fx-jre${JAVAVERSION}-linux_x64
+APP_DIR="${BASE_DIR}/${JAVA_PACKAGE}"
 if [ ! -d "${APP_DIR}" ]
 then
     PKG="/tmp/$(uuidgen).tar.gz"
