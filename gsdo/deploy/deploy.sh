@@ -11,6 +11,6 @@ java -jar "${APP_DIR}/${DISTNAME}-${VERSION}.jar" >/dev/null 2>&1 &
 PID=$!
 ps aux | grep java | grep react
 echo "Disowning ${PID}"
-disown $PID
+disown %-
 echo $PID > "${APP_DIR}/run.pid"
 cd "${OWD}"
