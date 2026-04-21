@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 APP_DIR="${HOME}/.local/programs/java"
-if [ ! -d "${APP_DIR}" ] then; mkdir -p "$APP_DIR"; fi
+if [ ! -d "${APP_DIR}" ]; then mkdir -p "$APP_DIR"; fi
 JAVA_PACKAGE=zulu${ZULUVERSION}-ca-fx-jre${JAVAVERSION}-linux_x64
 APP_DIR="${APP_DIR}/${JAVA_PACKAGE}"
 if [ ! -d "${APP_DIR}" ]
