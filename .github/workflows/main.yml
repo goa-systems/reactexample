@@ -53,10 +53,12 @@ jobs:
             !grad*
             !*.kts
           sparse-checkout-cone-mode: false
+      - name: Prepare
+        run: |
+          bash ./gsdo/prepare/jre.sh
       - name: Deploy
         env: 
           SSH_SVCDEPLOY_HETZNER: ${{ secrets.SSH_SVCDEPLOY_HETZNER }}
         run: |
-          bash ./gsdo/prepare/jre.sh
           bash ./gsdo/deploy/download.sh
           bash ./gsdo/deploy/deploy.sh
