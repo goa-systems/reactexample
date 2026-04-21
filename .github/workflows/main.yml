@@ -20,24 +20,24 @@ env:
   SERVERPORT: 8085
 
 jobs:
-  build:
-    runs-on: build
-    steps:
-      - uses: actions/checkout@v6
-      - name: Prepare environment
-        run: |
-          bash ./gsdo/prepare/jdk.sh
-          bash ./gsdo/prepare/gradle.sh
-          bash ./gsdo/prepare/sonarscanner.sh
-          bash ./gsdo/prepare/node.sh
-      - name: Run a multi-line script
-        run: |
-          bash ./gsdo/build/build.sh
-      - name: Publish
-        env: 
-          SSH_SVCDEPLOY_HETZNER: ${{ secrets.SSH_SVCDEPLOY_HETZNER }}
-        run: |
-          bash ./gsdo/publish/publish.sh
+#  build:
+#    runs-on: build
+#    steps:
+#      - uses: actions/checkout@v6
+#      - name: Prepare environment
+#        run: |
+#          bash ./gsdo/prepare/jdk.sh
+#          bash ./gsdo/prepare/gradle.sh
+#          bash ./gsdo/prepare/sonarscanner.sh
+#          bash ./gsdo/prepare/node.sh
+#      - name: Run a multi-line script
+#        run: |
+#          bash ./gsdo/build/build.sh
+#      - name: Publish
+#        env: 
+#          SSH_SVCDEPLOY_HETZNER: ${{ secrets.SSH_SVCDEPLOY_HETZNER }}
+#        run: |
+#          bash ./gsdo/publish/publish.sh
   deploy:
     runs-on: deploy
     needs: build
@@ -54,12 +54,12 @@ jobs:
             !grad*
             !*.kts
           sparse-checkout-cone-mode: false
-      - name: Prepare
-        run: |
-          bash ./gsdo/prepare/jre.sh
+#      - name: Prepare
+#        run: |
+#          bash ./gsdo/prepare/jre.sh
       - name: Deploy
         env: 
           SSH_SVCDEPLOY_HETZNER: ${{ secrets.SSH_SVCDEPLOY_HETZNER }}
         run: |
-          bash ./gsdo/deploy/download.sh
+          # bash ./gsdo/deploy/download.sh
           bash ./gsdo/deploy/deploy.sh
