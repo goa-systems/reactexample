@@ -61,5 +61,5 @@ jobs:
         env: 
           SSH_SVCDEPLOY_HETZNER: ${{ secrets.SSH_SVCDEPLOY_HETZNER }}
         run: |
-          # bash ./gsdo/deploy/download.sh
+          bash ./gsdo/deploy/download.sh
           bash ./gsdo/deploy/deploy.sh
