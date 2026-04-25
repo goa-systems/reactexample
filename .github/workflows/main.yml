@@ -24,11 +24,6 @@ jobs:
     runs-on: build
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/setup-java@v5
-        with:
-          distribution: 'zulu'
-          java-version: '25'
-      - run: whereis java
       - name: Prepare environment
         run: |
           bash ./gsdo/prepare/jdk.sh
@@ -45,7 +40,7 @@ jobs:
           bash ./gsdo/publish/publish.sh
   deploy:
     runs-on: deploy
-#    needs: build
+    needs: build
     steps:
       - name: Force clean workspace
         run: rm -rf ./* ./.??* || true
